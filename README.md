@@ -1,2 +1,3 @@
-credit_score_preprocessing
-credit_score_modeling
+notebooks
+1. credit_score_preprocessing
+2. credit_score_modeling
