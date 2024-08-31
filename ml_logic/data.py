@@ -5,11 +5,20 @@ import joblib
 import pickle
 
 
+# def load_data(id, customer_id, month, name, age, ssn, occupation, annual_income,
+#                monthly_inhand_salary, num_bank_accounts, num_credit_card,
+#                interest_rate, num_of_loan, type_of_loan, delay_from_due_date,
+#                num_of_delayed_payment, changed_credit_limit, num_credit_inquiries,
+#                credit_mix, outstanding_debt, credit_utilization_ratio,
+#                credit_history_age, payment_of_min_amount, total_emi_per_month,
+#                amount_invested_monthly, payment_behaviour, monthly_balance):
 
 
-def load_data(id, customer_id, month, name, age, ssn, occupation, annual_income,
-               monthly_inhand_salary, num_bank_accounts, num_credit_card,
-               interest_rate, num_of_loan, type_of_loan, delay_from_due_date,
+
+
+def load_data( customer_id, month, age, occupation, annual_income,
+               num_bank_accounts, num_credit_card,
+               interest_rate, num_of_loan, delay_from_due_date,
                num_of_delayed_payment, changed_credit_limit, num_credit_inquiries,
                credit_mix, outstanding_debt, credit_utilization_ratio,
                credit_history_age, payment_of_min_amount, total_emi_per_month,
@@ -21,20 +30,15 @@ def load_data(id, customer_id, month, name, age, ssn, occupation, annual_income,
 
 
     data = {
-        'ID': [id],
         'Customer_ID': [customer_id],
         'Month': [month],
-        'Name': [name],
         'Age': [age],
-        'SSN': [ssn],
         'Occupation': [occupation],
         'Annual_Income':[annual_income],
-        'Monthly_Inhand_Salary':[monthly_inhand_salary],
         'Num_Bank_Accounts':[num_bank_accounts],
         'Num_Credit_Card':[num_credit_card],
         'Interest_Rate':[interest_rate],
         'Num_of_Loan':[num_of_loan],
-        'Type_of_Loan':[type_of_loan],
         'Delay_from_due_date':[delay_from_due_date],
         'Num_of_Delayed_Payment':[num_of_delayed_payment],
         'Changed_Credit_Limit':[changed_credit_limit],
