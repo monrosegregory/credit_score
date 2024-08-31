@@ -1,2 +1,7 @@
 raw_data/
-model_random.sav/
+#do rafa abaixo
+.env
+my_dir/
+models/
+#*.ipynb
+*__pycache__*
