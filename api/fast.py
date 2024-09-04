@@ -11,6 +11,7 @@ from ml_logic.predict import predict_main
 
 
 app = FastAPI()
+pipe_path = 'models/preproc_deploy_2_greg.pkl'
 
 # Setup logging | Não faço ideia do que isso faz
 logging.basicConfig(level=logging.DEBUG)
@@ -69,7 +70,8 @@ def predict(
 
         print(type(df))
 
-        pipe = load_pipe('models/preproc_deploy.pkl')
+        #pipe = load_pipe('models/preproc_deploy.pkl')
+        pipe = load_pipe(pipe_path)
 
         processed = preproc(df, pipe)
 
@@ -97,15 +99,34 @@ def predict(
        'Payment_Behaviour_LowspentSmallvaluepayments'])
 
 
-        print(type(df_processed))
+        #print(type(df_processed))
 
-        print(df_processed.shape)
+        #print(df_processed.shape)
 
-        prediction = predict_main(model_path, df_processed)
+        prediction, proba = predict_main(model_path, df_processed)
 
-        print(prediction)
+        #print(prediction)
 
-        return {"Score: ": int(prediction)}
+        #print(int(proba*100))
+
+        # return {"Score: ": int(prediction)}
+        # return {"Credit Score Class: ": "Good 💰✅" if int(prediction) == 0 else
+        #                                 "Standard 😐" if int(prediction) == 2 else
+        #                                 "Poor ❌"}
+
+        # return {
+        #     "Credit Score Class": "Good 💰✅" if int(prediction) == 0 else
+        #                           "Standard 😐" if int(prediction) == 2 else
+        #                           "Poor ❌",
+        #     "Probability of the Score Class": f"{float(proba[0]) * 100:.0f}%"
+        # }
+
+        return {
+            "Credit_Score": int(prediction),
+            "Prob": float(proba[0])
+        }
+
+
 
     #peguei de precog, será que vale a pena manter?
     except ValueError as e:

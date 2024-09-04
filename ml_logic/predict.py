@@ -28,4 +28,8 @@ def predict_main(model_path, data):
     # Fazer várias predições reutilizando o mesmo modelo carregado
     result = model.predict(data)
 
-    return result
+    probabilities = model.predict_proba(data)
+
+    max_probability = probabilities.max(axis=1)
+
+    return result, max_probability
