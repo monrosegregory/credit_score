@@ -78,33 +78,33 @@ num_of_delayed_payment_title = st.text_input('Number of delayed payments (only n
 
 
 #changed_credit_limit
-st.markdown("<h4>% of Changed credit limit 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>% of Changed credit limit 🔄</h4>", unsafe_allow_html=True)
 changed_credit_limit_title = st.text_input('Changed credit limit (only numbers eg.: 2.00)', '2.00')
 
 
 #num_credit_inquiries
-st.markdown("<h4>Number of credit inquiries 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Number of credit inquiries 🔍</h4>", unsafe_allow_html=True)
 num_credit_inquiries_title = st.text_input('Number of credit inquiries (only numbers eg.: 2)', '2')
 
 
 #credit_mix
-st.markdown("<h4>Credit Mix 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Credit Mix 🎛️</h4>", unsafe_allow_html=True)
 credit_mix_options = ["Good", "Standard", "Bad"]
 credit_mix_selected_options = st.selectbox("Select an option:", credit_mix_options)
 
 
 #outstanding_debt
-st.markdown("<h4>Outstanding debt 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Outstanding debt 💸</h4>", unsafe_allow_html=True)
 outstanding_debt_title = st.text_input('Outstanding debt (only numbers eg.: 502.10)', '502.10')
 
 
 #credit_utilization_ratio
-st.markdown("<h4>Credit utilization ratio 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Credit utilization ratio 📊</h4>", unsafe_allow_html=True)
 credit_utilization_ratio_title = st.text_input('Credit utilization ratio (only numbers eg.: 20.10)', '20.10')
 
 
 #credit_history_age
-st.markdown("<h4>Credit History Age 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Credit History Age 🕰️</h4>", unsafe_allow_html=True)
 years = st.slider("Select years", 0, 100, 0)
 months = st.slider("Select months", 0, 11, 0)
 result_history_age = f"{years} Years and {months} Months"
@@ -118,22 +118,22 @@ payment_of_min_amount_selected_options = st.selectbox("Select an option:", payme
 
 
 #total_emi_per_month
-st.markdown("<h4>Total emi per month 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Total emi per month 🧾</h4>", unsafe_allow_html=True)
 total_emi_per_month_title = st.text_input('Total emi per month (only numbers eg.: 70.47)', '70.47')
 
 
 #amount_invested_monthly 162.44
-st.markdown("<h4>Amount invested monthly 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Amount invested monthly 📈</h4>", unsafe_allow_html=True)
 mount_invested_monthly_title = st.text_input('Amount invested monthly (only numbers eg.: 162.44)', '162.44')
 
 
 #payment_behaviour - LowspentLargevaluepayments
-st.markdown("<h4>Payment Behaviour 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Payment Behaviour 📅</h4>", unsafe_allow_html=True)
 payment_behaviour_options = ['LowspentSmallvaluepayments', 'HighspentMediumvaluepayments', 'LowspentMediumvaluepayments', 'HighspentLargevaluepayments', 'HighspentSmallvaluepayments', 'LowspentLargevaluepayments']
 payment_behaviour_selected_options = st.selectbox("Select an option:", payment_behaviour_options)
 
 #monthly_balance
-st.markdown("<h4>Monthly balance 💵</h4>", unsafe_allow_html=True)
+st.markdown("<h4>Monthly balance 💰</h4>", unsafe_allow_html=True)
 monthly_balance_title = st.text_input('Monthly balancey (only numbers eg.: 162.44)', '162.44')
 
 
