@@ -12,20 +12,6 @@ st.markdown("""
 # GitHub link
 st.markdown("[You can check here our Machine Learning code on GitHub](https://github.com/monrosegregory/credit_score)", unsafe_allow_html=True)
 
-# Fonction pour appliquer la coloration conditionnelle
-def apply_color(val, ref_val):
-    """Renvoie le style de couleur en fonction de la comparaison avec la référence."""
-    if isinstance(val, (int, float)):  # Appliquer seulement sur les valeurs numériques
-        if val < ref_val:
-            color = 'red'
-        elif val > ref_val:
-            color = 'green'
-        else:
-            color = 'black'
-        return f'color: {color}'
-    else:
-        return ''  # Pas de coloration pour les objets (textes)
-
 ### START ###
 
 # Input fields with validation
