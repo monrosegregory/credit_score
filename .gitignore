@@ -5,3 +5,4 @@ my_dir/
 models/
 #*.ipynb
 *__pycache__*
+Dockerfile
