@@ -3,5 +3,7 @@ raw_data/
 .env
 my_dir/
 models/
+Dockerfile
+.DS_Store
 #*.ipynb
 *__pycache__*

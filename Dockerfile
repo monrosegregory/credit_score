@@ -1,7 +1,7 @@
 
 #FROM
-FROM python:3.10.14-bullseye
-#FROM python:3.10.6-buster
+#FROM python:3.10.14-bullseye (Fernando)
+FROM python:3.10.6-buster
 
 # Install HDF5 system libraries
 RUN apt-get update && apt-get install -y \
