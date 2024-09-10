@@ -245,9 +245,18 @@ cols5 = st.columns([2, 1, 1])
 
 # Payment Behaviour
 with cols5[0]:
-    st.markdown("""<h8><div class="tooltip">📅 Payment Habits<span class="tooltiptext">This field describes the customer’s typical payment patterns. It includes factors such as how much they spend and the size of payments: whether they make small, medium, or large payments regularly, and whether they tend to spend a lot or a little.</span></div></h8>""", unsafe_allow_html=True)
-    payment_behaviour_options = ['LowspentSmallvaluepayments', 'HighspentMediumvaluepayments', 'LowspentMediumvaluepayments', 'HighspentLargevaluepayments', 'HighspentSmallvaluepayments', 'LowspentLargevaluepayments']
-    payment_behaviour = st.selectbox("Select an option:", payment_behaviour_options, label_visibility="collapsed")
+    st.markdown("""<h8><div class="tooltip">:date: Payment Habits<span class="tooltiptext">This field describes the customer’s typical payment patterns. It includes factors such as how much they spend and the size of payments: whether they make small, medium, or large payments regularly, and whether they tend to spend a lot or a little.</span></div></h8>""", unsafe_allow_html=True)
+    payment_behaviour_options = ['High Spent (Small Value)', 'High Spent (Medium Value)', 'High Spent (Large Value)', 'Low Spent (Small Value)', 'Low Spent (Medium Value)', 'Low Spent (Large Value)']
+    payment_behaviour_temp = st.selectbox("Select an option:", payment_behaviour_options, label_visibility="collapsed")
+    payment_mapping = {
+        "High Spent (Small Value)": "HighspentSmallvaluepayments",
+        "High Spent (Medium Value)": "HighspentMediumvaluepayments",
+        "High Spent (Large Value)": "HighspentLargevaluepayments",
+        "Low Spent (Small Value)": "LowspentSmallvaluepayments",
+        "Low Spent (Medium Value)": "LowspentMediumvaluepayments",
+        "Low Spent (Large Value)": "LowspentLargevaluepayments"
+    }
+    payment_behaviour = payment_mapping.get(payment_behaviour_temp)
 
 # Monthly Balance
 with cols5[1]:
@@ -345,9 +354,9 @@ if st.button("Calculate Score", type="primary"):
                 if result["Credit_Score"] == 0:
                     st.markdown(
                         """
-                        <div style='background-color: #d4edda; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #28a745; margin: 0;'>Good Credit Score</h1>
-                            <p style='font-size: 18px; color: #155724; margin-top: 10px;'>Lower Risk of Default | Better Loan Terms | Confidence in Borrower</p>
+                        <div style='background-color: #D4EDDA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                            <h1 style='font-size: 36px; color: #28A745; margin: 0;'>Good Credit Score</h1>
+                            <p style='font-size: 18px; color: #155724; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br>Lower Risk of Default | Better Loan Terms | Confidence in Borrower</p>
                         </div>
                         """,
                         unsafe_allow_html=True
@@ -355,9 +364,9 @@ if st.button("Calculate Score", type="primary"):
                 elif result["Credit_Score"] == 2:
                     st.markdown(
                         """
-                        <div style='background-color: #ffecb3; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #ff8c00; margin: 0;'>Standard Credit Score</h1>
-                            <p style='font-size: 18px; color: #ff8c00; margin-top: 10px;'>Moderate Risk | Competitive Loan Terms | Financial Stability</p>
+                        <div style='background-color: #FFECB3; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                            <h1 style='font-size: 36px; color: #FF8C00; margin: 0;'>Standard Credit Score</h1>
+                            <p style='font-size: 18px; color: #FF8C00; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Moderate Risk | Competitive Loan Terms | Financial Stability</p>
                         </div>
                         """,
                         unsafe_allow_html=True
@@ -365,9 +374,9 @@ if st.button("Calculate Score", type="primary"):
                 else:
                     st.markdown(
                         """
-                        <div style='background-color: #f8d7da; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #dc3545; margin: 0;'>Bad Credit Score</h1>
-                            <p style='font-size: 18px; color: #dc3545; margin-top: 10px;'>Higher Risk of Default | Stricter Loan Terms | Increased Scrutiny</p>
+                        <div style='background-color: #F8D7DA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                            <h1 style='font-size: 36px; color: #DC3545; margin: 0;'>Bad Credit Score</h1>
+                            <p style='font-size: 18px; color: #DC3545; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Higher Risk of Default | Stricter Loan Terms | Increased Scrutiny</p>
                         </div>
                         """,
                         unsafe_allow_html=True
