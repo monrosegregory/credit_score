@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
-import pdfkit
+# import pdfkit
 import tempfile
 import os
 
