@@ -24,7 +24,7 @@ html_content = """
 </html>
 """
 # Logo
-logo_url = "logo.png"
+logo_url = "/Users/gregorymonrose/code/monrosegregory/credit_score/ml_logic/logo.png"
 st.image(logo_url)
 
 # # Logo
