@@ -24,7 +24,7 @@ html_content = """
 </html>
 """
 # Logo
-logo_url = "/Users/gregorymonrose/code/monrosegregory/credit_score/ml_logic/logo.png"
+logo_url = "logo.png"
 st.image(logo_url)
 
 # # Logo
@@ -426,7 +426,7 @@ if st.button("Calculate Score", type="primary"):
                     st.warning("Result data is not available. Please run the calculation or check your inputs.")
 
                 # Load the dataset
-                persona = pd.read_csv('/Users/gregorymonrose/code/monrosegregory/credit_score/ml_logic/df_cleaned_31082024.csv')
+                persona = pd.read_csv('df_cleaned_31082024.csv')
 
                 # Filter the DataFrame to include only rows with 'Credit_Score' as 'Good'
                 persona_good = persona[persona['Credit_Score'] == 'Good']
