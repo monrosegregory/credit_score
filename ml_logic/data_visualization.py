@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 # import pdfkit
 import tempfile
 import os
+from PIL import Image
 
 html_content = """
 <html>
@@ -22,6 +23,9 @@ html_content = """
 </body>
 </html>
 """
+# Logo
+logo_url = "logo.png"
+st.image(logo_url)
 
 # # Logo
 # logo_url = "https://img.freepik.com/fotos-premium/bandeira-nacional-do-brasil-e-franca-background-para-designers_659987-40312.jpg?w=900"  # Substitua pelo URL ou caminho da sua logo
@@ -422,7 +426,7 @@ if st.button("Calculate Score", type="primary"):
                     st.warning("Result data is not available. Please run the calculation or check your inputs.")
 
                 # Load the dataset
-                persona = pd.read_csv('raw_data/df_cleaned_31082024.csv')
+                persona = pd.read_csv('df_cleaned_31082024.csv')
 
                 # Filter the DataFrame to include only rows with 'Credit_Score' as 'Good'
                 persona_good = persona[persona['Credit_Score'] == 'Good']
@@ -796,29 +800,29 @@ if st.button("Calculate Score", type="primary"):
 # Define HTML content for the PDF
 
 
-def create_pdf(html):
-    # Create a temporary file to store the PDF
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
-        pdfkit.from_string(html, temp_file.name)
-        temp_file.seek(0)
-        return temp_file.name
+# def create_pdf(html):
+#     # Create a temporary file to store the PDF
+#     with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
+#         pdfkit.from_string(html, temp_file.name)
+#         temp_file.seek(0)
+#         return temp_file.name
 
 # Button to display text and export as PDF
-if st.button("Show Contact Info and Export as PDF"):
-    # Display the contact text
-    st.markdown(html_content, unsafe_allow_html=True)
+# if st.button("Show Contact Info and Export as PDF"):
+#     # Display the contact text
+#     st.markdown(html_content, unsafe_allow_html=True)
 
-    # Generate PDF
-    pdf_path = create_pdf(html_content)
+#     # Generate PDF
+#     pdf_path = create_pdf(html_content)
 
-    # Provide the PDF for download
-    with open(pdf_path, "rb") as pdf_file:
-        st.download_button(
-            label="Download PDF",
-            data=pdf_file,
-            file_name="contact_info.pdf",
-            mime="application/pdf"
-        )
+#     # Provide the PDF for download
+#     with open(pdf_path, "rb") as pdf_file:
+#         st.download_button(
+#             label="Download PDF",
+#             data=pdf_file,
+#             file_name="contact_info.pdf",
+#             mime="application/pdf"
+#         )
 
     # Optionally, remove the temporary PDF file
-    os.remove(pdf_path)
+    # os.remove(pdf_path)
