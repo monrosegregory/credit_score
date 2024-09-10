@@ -24,8 +24,9 @@ html_content = """
 </html>
 """
 # Logo
+image = Image.open('logo.png')
 logo_url = "logo.png"
-st.image(logo_url)
+st.image(image)
 
 # # Logo
 # logo_url = "https://img.freepik.com/fotos-premium/bandeira-nacional-do-brasil-e-franca-background-para-designers_659987-40312.jpg?w=900"  # Substitua pelo URL ou caminho da sua logo
