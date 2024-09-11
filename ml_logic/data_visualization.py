@@ -309,6 +309,14 @@ if st.button("Calculate Score", type="primary"):
     # if 'proba' not in st.session_state:
     #     st.session_state.proba = None  # Will store the probability of the score
 
+    st.session_state['calculate_score'] = True
+
+else:
+
+    st.session_state['calculate_score'] = False
+
+if st.session_state['calculate_score'] == True:
+
     # Initialize variables before the button is clicked to avoid 'NameError' on refresh
     url = "https://credit-score-v5-1032836634135.us-west1.run.app/predict"
     result = None  # Initialize result variable
@@ -605,11 +613,11 @@ if st.button("Calculate Score", type="primary"):
             ]
         )
 
-        # Button
-        if st.button("Clique aqui"):
-            st.write("O botão foi clicado!")
-        else:
-            st.write("O botão ainda não foi clicado.")
+        # Button Julia
+        # if st.button("Clique aqui"):
+        #     st.write("O botão foi clicado!")
+        # else:
+        #     st.write("O botão ainda não foi clicado.")
 
         # Ensure results_df is available
         #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
