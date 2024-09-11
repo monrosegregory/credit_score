@@ -605,6 +605,12 @@ if st.button("Calculate Score", type="primary"):
             ]
         )
 
+        # Button
+        if st.button("Clique aqui"):
+            st.write("O botão foi clicado!")
+        else:
+            st.write("O botão ainda não foi clicado.")
+
         # Ensure results_df is available
         #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
         # results_df = st.session_state.results_df (Julia)
