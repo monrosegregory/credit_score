@@ -294,8 +294,8 @@ if not valid_total_emi: errors.append("Total EMI per Month")
 if not valid_invested_amount: errors.append("Amount invested monthly")
 if not valid_monthly_balance: errors.append("Monthly balance")
 
-if 'expander_open' not in st.session_state:
-    st.session_state.expander_open = False
+# if 'expander_open' not in st.session_state:
+#    st.session_state.expander_open = False
 
 # Section 6: Button
 st.markdown("<h4>Credit Score</h4>", unsafe_allow_html=True)
