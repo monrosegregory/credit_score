@@ -737,8 +737,8 @@ if st.button("Calculate Score", type="primary"):
             # Update previous results
             #st.session_state.previous_results = dict(zip(results_df["Field"], results_df["Current Value"]))
 
-        else:
-            st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
+        #else:
+        #    st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
     #st.session_state.results_df = results_df
 
     #except Exception as e:
