@@ -638,12 +638,15 @@ if st.session_state['calculate_score'] == True:
             title='Graph of Results by Feature and Persona',
             labels={'Feature': 'Features', 'Value': 'Values'},
             color_discrete_map={
-                'Current Value': 'black',  # Set color for 'Current Value' Ask Fernando
+                'Current Value': 'blue',  # Set color for 'Current Value' Ask Fernando
                 'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
                 'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
                 'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
             }
         )
+
+        # Modify marker size
+        fig.update_traces(marker=dict(size=10))  # Increase the size of the points to 10
 
         # Display the scatter plot in Streamlit
         st.plotly_chart(fig)
