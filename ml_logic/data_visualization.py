@@ -427,7 +427,7 @@ if st.button("Calculate Score", type="primary"):
                     st.warning("Result data is not available. Please run the calculation or check your inputs.")
 
                 # Load the dataset
-                persona = pd.read_csv('df_cleaned_31082024.csv')
+                persona = pd.read_csv('/raw_data/df_cleaned_31082024.csv')
 
                 # Filter the DataFrame to include only rows with 'Credit_Score' as 'Good'
                 persona_good = persona[persona['Credit_Score'] == 'Good']
