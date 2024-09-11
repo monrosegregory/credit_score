@@ -5,17 +5,6 @@ import joblib
 import pickle
 
 
-# def load_data(id, customer_id, month, name, age, ssn, occupation, annual_income,
-#                monthly_inhand_salary, num_bank_accounts, num_credit_card,
-#                interest_rate, num_of_loan, type_of_loan, delay_from_due_date,
-#                num_of_delayed_payment, changed_credit_limit, num_credit_inquiries,
-#                credit_mix, outstanding_debt, credit_utilization_ratio,
-#                credit_history_age, payment_of_min_amount, total_emi_per_month,
-#                amount_invested_monthly, payment_behaviour, monthly_balance):
-
-
-
-
 def load_data( customer_id, month, age, occupation, annual_income,
                num_bank_accounts, num_credit_card,
                interest_rate, num_of_loan, delay_from_due_date,
@@ -24,7 +13,7 @@ def load_data( customer_id, month, age, occupation, annual_income,
                credit_history_age, payment_of_min_amount, total_emi_per_month,
                amount_invested_monthly, payment_behaviour, monthly_balance):
 
-    ###QUAIS LIMITANTES PARA LOAD MODEL?
+
     if not (0 <= age <= 100):
         raise ValueError(f"Age {age} out of permited (0-100).")
 
@@ -59,7 +48,7 @@ def load_data( customer_id, month, age, occupation, annual_income,
     return df
 
 
-########### FUNCAO DE TRATAMENTO ############
+########### TREATMENT FUNCTION ############
 
 def cronological(df: pd.DataFrame):
     months_in_year = 12
@@ -104,7 +93,7 @@ def cronological(df: pd.DataFrame):
 
 
 
-########## ONDE CARREGA LOAD MODEL? DENTRO DO FAST API
+########## LOAD MODEL IN FAST API
 
 def load_pipe(filepath):
     """Load the pipe from a file using joblib."""

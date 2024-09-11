@@ -30,33 +30,15 @@ image = Image.open('ml_logic/logo.png')
 logo_url = "logo.png"
 st.image(image)
 
-# # Logo
-# logo_url = "https://img.freepik.com/fotos-premium/bandeira-nacional-do-brasil-e-franca-background-para-designers_659987-40312.jpg?w=900"  # Substitua pelo URL ou caminho da sua logo
-# st.markdown(
-#     f"""
-#     <style>
-#     .logo {{
-#         position: absolute;
-#         top: 15;
-#         left: 15;
-#         margin: 0px;
-#     }}
-#     </style>
-#     <div class="logo">
-#         <img src="{logo_url}" alt="Company Logo" width="100"/>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
 
-# App title and description
-# st.markdown("""
-#      ## Cirone & Monrose Data Science & AI Consultant 👨‍💼🧑‍💼📈
-#      #### - We provide data-driven insights for banks looking to understand their B2C customers.
-#      ##### - Please enter the customer's data, and we will develop our algorithm to deliver a Score Classification (Good, Standard, or Bad).
-# """)
 
-# Définir le style CSS pour l'infobulle
+#App title and description
+st.markdown("""
+     #### Providing data-driven insights for financial institutions to better understand their B2C customers.
+     ##### Enter the customer's data to receive a detailed score classification from our algorithm.
+""")
+
+# Set CSS style for tooltip
 tooltip_style = """
     <style>
     .tooltip {
@@ -273,8 +255,9 @@ with cols5[1]:
 
 # Comment
 with cols5[2]:
-    st.markdown("""<h8><div class="tooltip">📌 Comment<span class="tooltiptext">Please let your comment.</span></div></h8>""", unsafe_allow_html=True)
-    comment = st.text_input('', '', label_visibility="collapsed")
+    st.write("")
+    # st.markdown("""<h8><div class="tooltip">📌 Comment<span class="tooltiptext">Please let your comment.</span></div></h8>""", unsafe_allow_html=True)
+    # comment = st.text_input('', '', label_visibility="collapsed")
 
 # Collect errors
 errors = []
@@ -294,27 +277,21 @@ if not valid_total_emi: errors.append("Total EMI per Month")
 if not valid_invested_amount: errors.append("Amount invested monthly")
 if not valid_monthly_balance: errors.append("Monthly balance")
 
-# if 'expander_open' not in st.session_state:
-#    st.session_state.expander_open = False
+#Initialize session page
+if 'calculate_score' not in st.session_state:
+    st.session_state['calculate_score'] = False
+
 
 # Section 6: Button
 st.markdown("<h4>Credit Score</h4>", unsafe_allow_html=True)
 cols6 = st.columns(4)
 
-# Button to calculate the score based on the input data
+# Initialize Button to calculate the score based on the input data
 if st.button("Calculate Score", type="primary"):
-    # Initialize session state to store result and probability
-    # if 'result' not in st.session_state:
-    #     st.session_state.result = None  # Will store the API response
-    # if 'proba' not in st.session_state:
-    #     st.session_state.proba = None  # Will store the probability of the score
-
     st.session_state['calculate_score'] = True
 
-# else:
 
-#     st.session_state['calculate_score'] = False
-
+# Button to calculate the score based on the input data
 if st.session_state['calculate_score'] == True:
 
     # Initialize variables before the button is clicked to avoid 'NameError' on refresh
@@ -350,14 +327,11 @@ if st.session_state['calculate_score'] == True:
 
     results_df = None
 
-    # Error handling block
-    #try:
-        # Sending the request to the API
+
+    # Sending the request to the API
     response = requests.get(url, params=input_data)
 
     st.session_state.expander_open = True
-
-    # with st.expander("", expanded=st.session_state.expander_open):
 
     st.markdown("<h4>Credit Score Evaluation Result</h4>", unsafe_allow_html=True)
 
@@ -398,7 +372,6 @@ if st.session_state['calculate_score'] == True:
             )
 
         # Displaying the probability of the score classification
-        # st.markdown(f"<h1 style='font-size: 40px;'>Probability of the Score Class: {result.get('Prob', 0) * 100:.0f}%</h1>", unsafe_allow_html=True)
 
         st.markdown("<h4>Probability of the Score Class</h4>", unsafe_allow_html=True)
 
@@ -413,18 +386,10 @@ if st.session_state['calculate_score'] == True:
         if proba is not None:
             percentage = int(proba * 100)  # Convert the probability into a percentage
 
-            # Assign color based on the percentage range
-            if percentage < 50:
-                color = 'red'
-            elif 50 <= percentage < 75:
-                color = 'orange'
-            else:
-                color = 'green'
-
-            # HTML/CSS for the progress bar with dynamic color
+            # HTML/CSS for the progress bar
             progress_bar_html = f"""
             <div style="width: 100%; background-color: #e0e0e0; border-radius: 20px;">
-                <div style="width: {percentage}%; background-color: {color}; height: 30px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">
+                <div style="width: {percentage}%;background-color: gray; height: 30px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">
                     {percentage}%
                 </div>
             </div>
@@ -448,33 +413,6 @@ if st.session_state['calculate_score'] == True:
         # Filter the DataFrame to include only rows with 'Credit_Score' as 'Poor'
         persona_poor = persona[persona['Credit_Score'] == 'Poor']
 
-        # # Define persona_list
-        # persona_list = [
-        #     "Persona",
-        #     "NS",
-        #     round(persona['Age'].mean()),
-        #     persona['Occupation'].mode()[0],
-        #     round(persona['Annual_Income'].mean()),
-        #     round(persona['Num_Bank_Accounts'].mean()),
-        #     round(persona['Num_Credit_Card'].mean()),
-        #     round(persona['Interest_Rate'].mean()),
-        #     round(persona['Num_of_Loan'].mean()),
-        #     round(persona['Delay_from_due_date'].mean()),
-        #     round(persona['Num_of_Delayed_Payment'].mean()),
-        #     round(persona['Changed_Credit_Limit'].mean()),
-        #     round(persona['Num_Credit_Inquiries'].mean()),
-        #     persona['Credit_Mix'].mode()[0],
-        #     round(persona['Outstanding_Debt'].mean()),
-        #     round(persona['Credit_Utilization_Ratio'].mean()),
-        #     round(persona['Credit_History_Age_Months'].mean()),
-        #     persona['Payment_of_Min_Amount'].mode()[0],
-        #     round(persona['Total_EMI_per_month'].mean()),
-        #     round(persona['Amount_invested_monthly'].mean()),
-        #     persona['Payment_Behaviour'].mode()[0],
-        #     round(persona['Monthly_Balance'].mean()),
-        #     persona['Credit_Score'].mode()[0],
-        #     "NS"
-        #     ]
 
         # Define persona_good_list
         persona_good_list = [
@@ -581,13 +519,6 @@ if st.session_state['calculate_score'] == True:
             "Persona Bad": persona_poor_list
         })
 
-        # # Adding previous results if available
-        # if 'previous_results' in st.session_state and st.session_state.previous_results:
-        #     previous_results = st.session_state.previous_results
-        # else:
-        #     previous_results = {field: "N/A" for field in results_df["Field"]}
-
-        # results_df["Previous Value"] = results_df["Field"].map(previous_results)
 
         st.markdown("""<h4><div class="tooltip">Comparative Analysis of Results<span class="tooltiptext">The comparative analysis evaluates the Credit Score against Good, Standard, and Bad Persona benchmarks to highlight areas for improvement.</span></div></h4>""", unsafe_allow_html=True)
 
@@ -613,16 +544,6 @@ if st.session_state['calculate_score'] == True:
             ]
         )
 
-        # Button Julia
-        # if st.button("Clique aqui"):
-        #     st.write("O botão foi clicado!")
-        # else:
-        #     st.write("O botão ainda não foi clicado.")
-
-        # Ensure results_df is available
-        #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
-        # results_df = st.session_state.results_df (Julia)
-
         # Filter the DataFrame based on selected features
         results_df_filtered = results_df[results_df['Feature'].isin(selected_features)]
 
@@ -638,211 +559,36 @@ if st.session_state['calculate_score'] == True:
             title='Graph of Results by Feature and Persona',
             labels={'Feature': 'Features', 'Value': 'Values'},
             color_discrete_map={
-                'Current Value': 'blue',  # Set color for 'Current Value' Ask Fernando
-                'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
-                'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
-                'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
+                'Current Value': 'gray',
+                'Persona Good': 'green',
+                'Persona Standard': 'orange',
+                'Persona Bad': 'red'
             }
         )
 
         # Modify marker size
         fig.update_traces(marker=dict(size=10))  # Increase the size of the points to 10
 
+        fig.update_layout(
+                            title_font=dict(size=24, color='gray'),  # Title
+                            xaxis_title_font=dict(size=18, color='gray'),  # X axis title
+                            yaxis_title_font=dict(size=18, color='gray'),  # Y axis title
+                            legend_title_font=dict(size=16, color='gray'),  # Legend title
+                            legend_font=dict(size=14, color='gray'),  # legend text
+
+                            xaxis=dict(
+                                linecolor='gray',  # X line
+                                gridcolor='lightgray',   # X Gridline
+                                tickfont=dict(color='gray')  # X ticks
+                            ),
+                            yaxis=dict(
+                                linecolor='gray',  # Y line
+                                gridcolor='lightgray',   # Y Gridline
+                                tickfont=dict(color='gray')  # Y ticks
+                            ),
+                            plot_bgcolor='whitesmoke'  # Background
+                        )
+
+
         # Display the scatter plot in Streamlit
         st.plotly_chart(fig)
-        #else:
-        #    st.error("No data available. Please ensure the DataFrame is properly loaded.")
-
-# ### GRAPHE START
-#                 # Initialize scalers and encoders
-#                 scaler = MinMaxScaler()
-#                 label_encoder = LabelEncoder()
-
-#                 # Separate numerical and categorical fields
-#                 numerical_features = [
-#                     'Age', 'Annual Income', 'Number of Bank Accounts',
-#                     'Number of Credit Cards', 'Interest Rate', 'Number of Loans', 'Days Delayed',
-#                     'Number of Delayed Payments', 'Changed Credit Limit', 'Number of Credit Inquiries',
-#                     'Outstanding Debt', 'Credit Utilization Ratio', 'Credit History Age',
-#                     'Total EMI per Month', 'Amount Invested Monthly', 'Monthly Balance'
-#                 ]
-#                 categorical_features = ['Customer ID', 'Occupation', 'Credit Mix', 'Payment of Min Amount', 'Payment Behaviour']
-
-#                 # Define function to encode categorical values
-#                 def encode_categorical(data, columns):
-#                     for column in columns:
-#                         data[column] = label_encoder.fit_transform(data[column])
-#                     return data
-
-#                 # Define function to scale numerical values
-#                 def scale_numerical(data, columns):
-#                     data[columns] = scaler.fit_transform(data[columns])
-#                     return data
-
-#                 # Create a copy of the DataFrame for transformation
-#                 results_df_encoded = results_df.copy()
-
-#                 # Apply scaling to numerical features
-#                 numerical_columns = [col for col in results_df['Feature'] if col in numerical_features]
-#                 results_df_encoded = scale_numerical(results_df_encoded, numerical_columns)
-
-#                 # Apply encoding to categorical features
-#                 categorical_columns = [col for col in results_df['Feature'] if col not in numerical_features]
-#                 results_df_encoded = encode_categorical(results_df_encoded, categorical_columns)
-
-#                 results_melted = results_df_encoded.melt(id_vars='Feature', var_name='Persona', value_name='Value')
-
-#                 # Créer un graphique avec les features en X et les valeurs en Y, avec Persona en légende couleur
-#                 fig = px.bar(results_melted, x='Feature', y='Value', color='Persona',
-#                              title='Graphique des Résultats par Feature et Persona',
-#                              labels={'Feature': 'Features', 'Value': 'Valeurs'})
-
-#                 # Afficher le graphique dans Streamlit
-#                 st.plotly_chart(fig)
-
-
-#                 # # Scaler pour les données numériques
-#                 # scaler = MinMaxScaler()
-
-#                 # # Encoder pour les données catégorielles
-#                 # label_encoder = LabelEncoder()
-
-#                 # # Parcourir les rows du DataFrame et traiter chaque Field
-#                 # for index, row in results_df.iterrows():
-#                 #     field = row['Feature']
-
-#                 # # Scaler pour les données numériques
-#                 # scaler = MinMaxScaler()
-
-#                 # # Encoder pour les données catégorielles
-#                 # label_encoder = LabelEncoder()
-
-#                 # # Parcourir les rows du DataFrame et traiter chaque Field
-#                 # for index, row in results_df.iterrows():
-#                 #     field = row['Feature']
-
-#                 #     # Appliquer normalisation si Field est numérique
-#                 #     if field in ['Age', 'Annual Income', 'Number of Bank Accounts',
-#                 #                 'Number of Credit Cards', 'Interest Rate', 'Number of Loans', 'Days Delayed',
-#                 #                 'Number of Delayed Payments', 'Changed Credit Limit', 'Number of Credit Inquiries',
-#                 #                 'Outstanding Debt', 'Credit Utilization Ratio', 'Credit History Age',
-#                 #                 'Total EMI per Month', 'Amount Invested Monthly', 'Monthly Balance']:
-
-#                 #         # Normaliser les valeurs des colonnes correspondantes
-#                 #         results_df.loc[index, ['Current Value', 'Persona Good', 'Persona Standard', 'Persona Bad']] = \
-#                 #             scaler.fit_transform([[row['Current Value'], row['Persona Good'], row['Persona Standard'], row['Persona Bad']]])
-
-#                 #     # Appliquer un encodage catégoriel si Field est catégorique
-#                 #     elif field in ['Customer ID', 'Occupation', 'Credit Mix', 'Payment of Min Amount', 'Payment Behaviour']:
-#                 #         # Encoder les valeurs catégoriques
-#                 #         for col in ['Current Value', 'Persona Good', 'Persona Standard', 'Persona Bad']:
-#                 #             results_df.loc[index, col] = label_encoder.fit_transform([row[col]])[0]
-
-#                 # # Réorganiser le DataFrame pour être compatible avec Plotly (melt)
-#                 # results_melted = results_df.melt(id_vars='Feature', var_name='Persona', value_name='Value')
-
-#                 # # Créer un graphique avec les features en X et les valeurs en Y, avec Persona en légende couleur
-#                 # fig = px.bar(results_melted, x='Feature', y='Value', color='Persona',
-#                 #             title='Graphique des Résultats par Feature et Persona',
-#                 #             labels={'Feature': 'Features', 'Value': 'Valeurs'})
-
-#                 # st.plotly_chart(fig)
-
-# ### GRAPHE END
-
-
-            # Update previous results
-            #st.session_state.previous_results = dict(zip(results_df["Field"], results_df["Current Value"]))
-
-        #else:
-        #    st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
-    #st.session_state.results_df = results_df
-
-    #except Exception as e:
-    #        st.error(f"An error occurred: {str(e)}")
-
-# # Define the function to convert the DataFrame
-# @st.cache_data
-# def convert_df(df):
-#     return df.to_csv().encode("utf-8")
-
-# # Ensure results_df is available in session state
-# if 'results_df' not in st.session_state:
-#     st.session_state.results_df = None  # Initialize if not present
-
-# # Check if results_df is available and assign it
-# results_df = st.session_state.results_df
-
-# # Display the results if available
-# if results_df is not None:
-#     csv = convert_df(results_df)
-
-#     # Create columns for buttons
-#     col1, col2, col3, col4 = st.columns(4)
-
-#     # Download button in the first column
-#     with col1:
-#         st.download_button(
-#             label="Download CSV",
-#             data=csv,
-#             file_name="credit_score_data.csv",
-#             mime="text/csv",
-#         )
-
-#     # # Reset results button in the second column
-#     # with col2:
-#     #     if st.button("Reset Results"):
-#     #         st.caching.clear_cache()
-#     #         # Do not set results_df to None here to keep previous results visible
-
-#     # Finish button in the third column
-#     with col3:
-#         if st.button("Finish Presentation"):
-#             st.markdown(
-#                 """
-#                 <h1 style='font-size: 40px;'>Thank you all</h1>
-#                 <p style='font-size: 20px;'>If you want to get in touch: let's chat on LinkedIn!</p>
-#                 <p style='font-size: 20px;'>Fernando Cirone & Gregory Monrose</p>
-#                 """,
-#                 unsafe_allow_html=True
-#             )
-
-#     # Feedback button in the fourth column
-#     with col4:
-#         sentiment_mapping = ["one", "two", "three", "four", "five"]
-#         selected = st.selectbox("Rate your experience:", options=range(5), format_func=lambda x: sentiment_mapping[x])
-#         if selected is not None:
-#             st.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
-
-# else:
-#     st.info("No data available. Please upload or generate results.")
-
-# Define HTML content for the PDF
-
-
-# def create_pdf(html):
-#     # Create a temporary file to store the PDF
-#     with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
-#         pdfkit.from_string(html, temp_file.name)
-#         temp_file.seek(0)
-#         return temp_file.name
-
-# Button to display text and export as PDF
-# if st.button("Show Contact Info and Export as PDF"):
-#     # Display the contact text
-#     st.markdown(html_content, unsafe_allow_html=True)
-
-#     # Generate PDF
-#     pdf_path = create_pdf(html_content)
-
-#     # Provide the PDF for download
-#     with open(pdf_path, "rb") as pdf_file:
-#         st.download_button(
-#             label="Download PDF",
-#             data=pdf_file,
-#             file_name="contact_info.pdf",
-#             mime="application/pdf"
-#         )
-
-    # Optionally, remove the temporary PDF file
-    # os.remove(pdf_path)
