@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 # import pdfkit
 import tempfile
 import os
-# from PIL import Image
+from PIL import Image
 
 df_path = os.path.join(os.getcwd(), "ml_logic/df_cleaned_31082024.csv")
 
@@ -25,10 +25,10 @@ html_content = """
 </body>
 </html>
 """
-# # Logo
-# image = Image.open('logo.png')
-# logo_url = "logo.png"
-# st.image(image)
+# Logo
+image = Image.open('ml_logic/logo.png')
+logo_url = "logo.png"
+st.image(image)
 
 # # Logo
 # logo_url = "https://img.freepik.com/fotos-premium/bandeira-nacional-do-brasil-e-franca-background-para-designers_659987-40312.jpg?w=900"  # Substitua pelo URL ou caminho da sua logo
