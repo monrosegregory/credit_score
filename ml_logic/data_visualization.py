@@ -595,13 +595,13 @@ if st.session_state['calculate_score'] == True:
 
         # List of available features
         available_features = [
-            "Customer ID", "Age", "Occupation", "Annual Income",
+            "Age", "Annual Income",
             "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate",
             "Number of Loans", "Days Delayed", "Number of Delayed Payments",
-            "Changed Credit Limit", "Number of Credit Inquiries", "Credit Mix",
+            "Changed Credit Limit", "Number of Credit Inquiries",
             "Outstanding Debt", "Credit Utilization Ratio", "Credit History Age",
-            "Payment of Min Amount", "Total EMI per Month", "Amount Invested Monthly",
-            "Payment Behaviour", "Monthly Balance", "Credit Score"
+            "Total EMI per Month", "Amount Invested Monthly",
+            "Monthly Balance"
         ]
 
         # User selects features from the list
