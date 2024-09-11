@@ -606,35 +606,35 @@ if st.button("Calculate Score", type="primary"):
                 )
 
                 # Ensure results_df is available
-                if 'results_df' in st.session_state and not st.session_state.results_df.empty:
-                    results_df = st.session_state.results_df
+                #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
+                # results_df = st.session_state.results_df (Julia)
 
-                    # Filter the DataFrame based on selected features
-                    results_df_filtered = results_df[results_df['Feature'].isin(selected_features)]
+                # Filter the DataFrame based on selected features
+                results_df_filtered = results_df[results_df['Feature'].isin(selected_features)]
 
-                    # Reshape the DataFrame for Plotly (melt)
-                    results_melted = results_df_filtered.melt(id_vars='Feature', var_name='Persona', value_name='Value')
+                # Reshape the DataFrame for Plotly (melt)
+                results_melted = results_df_filtered.melt(id_vars='Feature', var_name='Persona', value_name='Value')
 
-                    # Create a scatter plot
-                    fig = px.scatter(
-                        results_melted,
-                        x='Feature',
-                        y='Value',
-                        color='Persona',
-                        title='Graph of Results by Feature and Persona',
-                        labels={'Feature': 'Features', 'Value': 'Values'},
-                        color_discrete_map={
-                            'Current Value': 'black',  # Set color for 'Current Value' Ask Fernando
-                            'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
-                            'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
-                            'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
-                        }
-                    )
+                # Create a scatter plot
+                fig = px.scatter(
+                    results_melted,
+                    x='Feature',
+                    y='Value',
+                    color='Persona',
+                    title='Graph of Results by Feature and Persona',
+                    labels={'Feature': 'Features', 'Value': 'Values'},
+                    color_discrete_map={
+                        'Current Value': 'black',  # Set color for 'Current Value' Ask Fernando
+                        'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
+                        'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
+                        'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
+                    }
+                )
 
-                    # Display the scatter plot in Streamlit
-                    st.plotly_chart(fig)
-                else:
-                    st.error("No data available. Please ensure the DataFrame is properly loaded.")
+                # Display the scatter plot in Streamlit
+                st.plotly_chart(fig)
+                #else:
+                #    st.error("No data available. Please ensure the DataFrame is properly loaded.")
 
 # ### GRAPHE START
 #                 # Initialize scalers and encoders
@@ -739,7 +739,7 @@ if st.button("Calculate Score", type="primary"):
 
             else:
                 st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
-        st.session_state.results_df = results_df
+        #st.session_state.results_df = results_df
 
     except Exception as e:
             st.error(f"An error occurred: {str(e)}")
