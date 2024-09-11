@@ -311,9 +311,9 @@ if st.button("Calculate Score", type="primary"):
 
     st.session_state['calculate_score'] = True
 
-else:
+# else:
 
-    st.session_state['calculate_score'] = False
+#     st.session_state['calculate_score'] = False
 
 if st.session_state['calculate_score'] == True:
 
