@@ -8,7 +8,7 @@ import tempfile
 import os
 # from PIL import Image
 
-df_path = os.path.join(os.getcwd(), "df_cleaned_31082024.csv")
+df_path = os.path.join(os.getcwd(), "ml_logic/df_cleaned_31082024.csv")
 
 html_content = """
 <html>
