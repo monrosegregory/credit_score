@@ -304,10 +304,10 @@ cols6 = st.columns(4)
 # Button to calculate the score based on the input data
 if st.button("Calculate Score", type="primary"):
     # Initialize session state to store result and probability
-    if 'result' not in st.session_state:
-        st.session_state.result = None  # Will store the API response
-    if 'proba' not in st.session_state:
-        st.session_state.proba = None  # Will store the probability of the score
+    # if 'result' not in st.session_state:
+    #     st.session_state.result = None  # Will store the API response
+    # if 'proba' not in st.session_state:
+    #     st.session_state.proba = None  # Will store the probability of the score
 
     # Initialize variables before the button is clicked to avoid 'NameError' on refresh
     url = "https://credit-score-v5-1032836634135.us-west1.run.app/predict"
@@ -343,250 +343,212 @@ if st.button("Calculate Score", type="primary"):
     results_df = None
 
     # Error handling block
-    try:
+    #try:
         # Sending the request to the API
-        response = requests.get(url, params=input_data)
+    response = requests.get(url, params=input_data)
 
-        st.session_state.expander_open = True
+    st.session_state.expander_open = True
 
-        with st.expander("", expanded=st.session_state.expander_open):
+    with st.expander("", expanded=st.session_state.expander_open):
 
-            st.markdown("<h4>Credit Score Evaluation Result</h4>", unsafe_allow_html=True)
+        st.markdown("<h4>Credit Score Evaluation Result</h4>", unsafe_allow_html=True)
 
-            # Check if the request was successful
-            if response.status_code == 200:
-                result = response.json()  # Fetch the result containing the credit score
+        # Check if the request was successful
+        if response.status_code == 200:
+            result = response.json()  # Fetch the result containing the credit score
 
-                # Displaying the score classification based on the 'Credit_Score' value
-                if result["Credit_Score"] == 0:
-                    st.markdown(
-                        """
-                        <div style='background-color: #D4EDDA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #28A745; margin: 0;'>Good Credit Score</h1>
-                            <p style='font-size: 18px; color: #155724; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br>Lower Risk of Default | Better Loan Terms | Confidence in Borrower</p>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-                elif result["Credit_Score"] == 2:
-                    st.markdown(
-                        """
-                        <div style='background-color: #FFECB3; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #FF8C00; margin: 0;'>Standard Credit Score</h1>
-                            <p style='font-size: 18px; color: #FF8C00; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Moderate Risk | Competitive Loan Terms | Financial Stability</p>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-                else:
-                    st.markdown(
-                        """
-                        <div style='background-color: #F8D7DA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
-                            <h1 style='font-size: 36px; color: #DC3545; margin: 0;'>Bad Credit Score</h1>
-                            <p style='font-size: 18px; color: #DC3545; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Higher Risk of Default | Stricter Loan Terms | Increased Scrutiny</p>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-
-                # Displaying the probability of the score classification
-                # st.markdown(f"<h1 style='font-size: 40px;'>Probability of the Score Class: {result.get('Prob', 0) * 100:.0f}%</h1>", unsafe_allow_html=True)
-
-                st.markdown("<h4>Probability of the Score Class</h4>", unsafe_allow_html=True)
-
-                # Storing the probability
-                proba = result.get('Prob', 0)  # Ensure proba is a number between 0 and 1
-
-                # Store the result and probability in session state
-                st.session_state.result = result
-                st.session_state.proba = proba
-
-                # If the probability is available, display a dynamic progress bar
-                if proba is not None:
-                    percentage = int(proba * 100)  # Convert the probability into a percentage
-
-                    # Assign color based on the percentage range
-                    if percentage < 50:
-                        color = 'red'
-                    elif 50 <= percentage < 75:
-                        color = 'orange'
-                    else:
-                        color = 'green'
-
-                    # HTML/CSS for the progress bar with dynamic color
-                    progress_bar_html = f"""
-                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 20px;">
-                        <div style="width: {percentage}%; background-color: {color}; height: 30px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">
-                            {percentage}%
-                        </div>
-                    </div>
+            # Displaying the score classification based on the 'Credit_Score' value
+            if result["Credit_Score"] == 0:
+                st.markdown(
                     """
+                    <div style='background-color: #D4EDDA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                        <h1 style='font-size: 36px; color: #28A745; margin: 0;'>Good Credit Score</h1>
+                        <p style='font-size: 18px; color: #155724; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br>Lower Risk of Default | Better Loan Terms | Confidence in Borrower</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            elif result["Credit_Score"] == 2:
+                st.markdown(
+                    """
+                    <div style='background-color: #FFECB3; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                        <h1 style='font-size: 36px; color: #FF8C00; margin: 0;'>Standard Credit Score</h1>
+                        <p style='font-size: 18px; color: #FF8C00; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Moderate Risk | Competitive Loan Terms | Financial Stability</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            else:
+                st.markdown(
+                    """
+                    <div style='background-color: #F8D7DA; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 20px;'>
+                        <h1 style='font-size: 36px; color: #DC3545; margin: 0;'>Bad Credit Score</h1>
+                        <p style='font-size: 18px; color: #DC3545; margin-top: 10px;'>Cirone & Monrose analysis and recommendation: <br> Higher Risk of Default | Stricter Loan Terms | Increased Scrutiny</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
-                    # Render the progress bar in the app
-                    st.markdown(progress_bar_html, unsafe_allow_html=True)
+            # Displaying the probability of the score classification
+            # st.markdown(f"<h1 style='font-size: 40px;'>Probability of the Score Class: {result.get('Prob', 0) * 100:.0f}%</h1>", unsafe_allow_html=True)
 
+            st.markdown("<h4>Probability of the Score Class</h4>", unsafe_allow_html=True)
+
+            # Storing the probability
+            proba = result.get('Prob', 0)  # Ensure proba is a number between 0 and 1
+
+            # Store the result and probability in session state
+            st.session_state.result = result
+            st.session_state.proba = proba
+
+            # If the probability is available, display a dynamic progress bar
+            if proba is not None:
+                percentage = int(proba * 100)  # Convert the probability into a percentage
+
+                # Assign color based on the percentage range
+                if percentage < 50:
+                    color = 'red'
+                elif 50 <= percentage < 75:
+                    color = 'orange'
                 else:
-                    st.warning("Result data is not available. Please run the calculation or check your inputs.")
+                    color = 'green'
 
-                # Load the dataset
-                persona = pd.read_csv(df_path)
+                # HTML/CSS for the progress bar with dynamic color
+                progress_bar_html = f"""
+                <div style="width: 100%; background-color: #e0e0e0; border-radius: 20px;">
+                    <div style="width: {percentage}%; background-color: {color}; height: 30px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">
+                        {percentage}%
+                    </div>
+                </div>
+                """
 
-                # Filter the DataFrame to include only rows with 'Credit_Score' as 'Good'
-                persona_good = persona[persona['Credit_Score'] == 'Good']
+                # Render the progress bar in the app
+                st.markdown(progress_bar_html, unsafe_allow_html=True)
 
-                # Filter the DataFrame to include only rows with 'Credit_Score' as 'Standard'
-                persona_standard = persona[persona['Credit_Score'] == 'Standard']
+            else:
+                st.warning("Result data is not available. Please run the calculation or check your inputs.")
 
-                # Filter the DataFrame to include only rows with 'Credit_Score' as 'Poor'
-                persona_poor = persona[persona['Credit_Score'] == 'Poor']
+            # Load the dataset
+            persona = pd.read_csv(df_path)
 
-                # # Define persona_list
-                # persona_list = [
-                #     "Persona",
-                #     "NS",
-                #     round(persona['Age'].mean()),
-                #     persona['Occupation'].mode()[0],
-                #     round(persona['Annual_Income'].mean()),
-                #     round(persona['Num_Bank_Accounts'].mean()),
-                #     round(persona['Num_Credit_Card'].mean()),
-                #     round(persona['Interest_Rate'].mean()),
-                #     round(persona['Num_of_Loan'].mean()),
-                #     round(persona['Delay_from_due_date'].mean()),
-                #     round(persona['Num_of_Delayed_Payment'].mean()),
-                #     round(persona['Changed_Credit_Limit'].mean()),
-                #     round(persona['Num_Credit_Inquiries'].mean()),
-                #     persona['Credit_Mix'].mode()[0],
-                #     round(persona['Outstanding_Debt'].mean()),
-                #     round(persona['Credit_Utilization_Ratio'].mean()),
-                #     round(persona['Credit_History_Age_Months'].mean()),
-                #     persona['Payment_of_Min_Amount'].mode()[0],
-                #     round(persona['Total_EMI_per_month'].mean()),
-                #     round(persona['Amount_invested_monthly'].mean()),
-                #     persona['Payment_Behaviour'].mode()[0],
-                #     round(persona['Monthly_Balance'].mean()),
-                #     persona['Credit_Score'].mode()[0],
-                #     "NS"
-                #     ]
+            # Filter the DataFrame to include only rows with 'Credit_Score' as 'Good'
+            persona_good = persona[persona['Credit_Score'] == 'Good']
 
-                # Define persona_good_list
-                persona_good_list = [
-                    "Good",
-                    round(persona_good['Age'].mean()),
-                    persona_good['Occupation'].mode()[0],
-                    round(persona_good['Annual_Income'].mean()),
-                    round(persona_good['Num_Bank_Accounts'].mean()),
-                    round(persona_good['Num_Credit_Card'].mean()),
-                    round(persona_good['Interest_Rate'].mean()),
-                    round(persona_good['Num_of_Loan'].mean()),
-                    round(persona_good['Delay_from_due_date'].mean()),
-                    round(persona_good['Num_of_Delayed_Payment'].mean()),
-                    round(persona_good['Changed_Credit_Limit'].mean()),
-                    round(persona_good['Num_Credit_Inquiries'].mean()),
-                    persona_good['Credit_Mix'].mode()[0],
-                    round(persona_good['Outstanding_Debt'].mean()),
-                    round(persona_good['Credit_Utilization_Ratio'].mean()),
-                    round(persona_good['Credit_History_Age_Months'].mean()),
-                    persona_good['Payment_of_Min_Amount'].mode()[0],
-                    round(persona_good['Total_EMI_per_month'].mean()),
-                    round(persona_good['Amount_invested_monthly'].mean()),
-                    persona_good['Payment_Behaviour'].mode()[0],
-                    round(persona_good['Monthly_Balance'].mean()),
-                    persona_good['Credit_Score'].mode()[0]
-                    ]
+            # Filter the DataFrame to include only rows with 'Credit_Score' as 'Standard'
+            persona_standard = persona[persona['Credit_Score'] == 'Standard']
 
-                # Define persona_standard_list
-                persona_standard_list = [
-                    "Standard",
-                    round(persona_standard['Age'].mean()),
-                    persona_standard['Occupation'].mode()[0],
-                    round(persona_standard['Annual_Income'].mean()),
-                    round(persona_standard['Num_Bank_Accounts'].mean()),
-                    round(persona_standard['Num_Credit_Card'].mean()),
-                    round(persona_standard['Interest_Rate'].mean()),
-                    round(persona_standard['Num_of_Loan'].mean()),
-                    round(persona_standard['Delay_from_due_date'].mean()),
-                    round(persona_standard['Num_of_Delayed_Payment'].mean()),
-                    round(persona_standard['Changed_Credit_Limit'].mean()),
-                    round(persona_standard['Num_Credit_Inquiries'].mean()),
-                    persona_standard['Credit_Mix'].mode()[0],
-                    round(persona_standard['Outstanding_Debt'].mean()),
-                    round(persona_standard['Credit_Utilization_Ratio'].mean()),
-                    round(persona_standard['Credit_History_Age_Months'].mean()),
-                    persona_standard['Payment_of_Min_Amount'].mode()[0],
-                    round(persona_standard['Total_EMI_per_month'].mean()),
-                    round(persona_standard['Amount_invested_monthly'].mean()),
-                    persona_standard['Payment_Behaviour'].mode()[0],
-                    round(persona_standard['Monthly_Balance'].mean()),
-                    persona_standard['Credit_Score'].mode()[0]
-                    ]
+            # Filter the DataFrame to include only rows with 'Credit_Score' as 'Poor'
+            persona_poor = persona[persona['Credit_Score'] == 'Poor']
 
-                # Define persona_poor_list
-                persona_poor_list = [
-                    "Bad",
-                    round(persona_poor['Age'].mean()),
-                    persona_poor['Occupation'].mode()[0],
-                    round(persona_poor['Annual_Income'].mean()),
-                    round(persona_poor['Num_Bank_Accounts'].mean()),
-                    round(persona_poor['Num_Credit_Card'].mean()),
-                    round(persona_poor['Interest_Rate'].mean()),
-                    round(persona_poor['Num_of_Loan'].mean()),
-                    round(persona_poor['Delay_from_due_date'].mean()),
-                    round(persona_poor['Num_of_Delayed_Payment'].mean()),
-                    round(persona_poor['Changed_Credit_Limit'].mean()),
-                    round(persona_poor['Num_Credit_Inquiries'].mean()),
-                    persona_poor['Credit_Mix'].mode()[0],
-                    round(persona_poor['Outstanding_Debt'].mean()),
-                    round(persona_poor['Credit_Utilization_Ratio'].mean()),
-                    round(persona_poor['Credit_History_Age_Months'].mean()),
-                    persona_poor['Payment_of_Min_Amount'].mode()[0],
-                    round(persona_poor['Total_EMI_per_month'].mean()),
-                    round(persona_poor['Amount_invested_monthly'].mean()),
-                    persona_poor['Payment_Behaviour'].mode()[0],
-                    round(persona_poor['Monthly_Balance'].mean()),
-                    "Bad",
-                    ]
+            # # Define persona_list
+            # persona_list = [
+            #     "Persona",
+            #     "NS",
+            #     round(persona['Age'].mean()),
+            #     persona['Occupation'].mode()[0],
+            #     round(persona['Annual_Income'].mean()),
+            #     round(persona['Num_Bank_Accounts'].mean()),
+            #     round(persona['Num_Credit_Card'].mean()),
+            #     round(persona['Interest_Rate'].mean()),
+            #     round(persona['Num_of_Loan'].mean()),
+            #     round(persona['Delay_from_due_date'].mean()),
+            #     round(persona['Num_of_Delayed_Payment'].mean()),
+            #     round(persona['Changed_Credit_Limit'].mean()),
+            #     round(persona['Num_Credit_Inquiries'].mean()),
+            #     persona['Credit_Mix'].mode()[0],
+            #     round(persona['Outstanding_Debt'].mean()),
+            #     round(persona['Credit_Utilization_Ratio'].mean()),
+            #     round(persona['Credit_History_Age_Months'].mean()),
+            #     persona['Payment_of_Min_Amount'].mode()[0],
+            #     round(persona['Total_EMI_per_month'].mean()),
+            #     round(persona['Amount_invested_monthly'].mean()),
+            #     persona['Payment_Behaviour'].mode()[0],
+            #     round(persona['Monthly_Balance'].mean()),
+            #     persona['Credit_Score'].mode()[0],
+            #     "NS"
+            #     ]
 
-                # Display detailed results in a compact table
-                results_df = pd.DataFrame({
-                    "Feature": [
-                        "Customer ID", "Age", "Occupation", "Annual Income",
-                        "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate",
-                        "Number of Loans", "Days Delayed", "Number of Delayed Payments",
-                        "Changed Credit Limit", "Number of Credit Inquiries", "Credit Mix",
-                        "Outstanding Debt", "Credit Utilization Ratio", "Credit History Age",
-                        "Payment of Min Amount", "Total EMI per Month", "Amount Invested Monthly",
-                        "Payment Behaviour", "Monthly Balance", "Credit Score"
-                    ],
-                    "Current Value": [
-                        customer_id, age_value, occupation, annual_income_value,
-                        num_bank_accounts_value, num_credit_cards_value, interest_rate_value,
-                        num_loans_value, days_delayed_value, num_delayed_payments_value,
-                        changed_credit_limit_value, num_credit_inquiries_value, credit_mix,
-                        outstanding_debt_value, credit_utilization_ratio_value, credit_history_age,
-                        payment_of_min_amount, total_emi_per_month_value, amount_invested_monthly_value,
-                        payment_behaviour, monthly_balance_value,
-                        'Good' if result.get('Credit_Score') == 0 else 'Standard' if result.get('Credit_Score') == 2 else 'Bad'
-                    ],
-                    # "Persona": persona_list,
-                    "Persona Good": persona_good_list,
-                    "Persona Standard": persona_standard_list,
-                    "Persona Bad": persona_poor_list
-                })
+            # Define persona_good_list
+            persona_good_list = [
+                "Good",
+                round(persona_good['Age'].mean()),
+                persona_good['Occupation'].mode()[0],
+                round(persona_good['Annual_Income'].mean()),
+                round(persona_good['Num_Bank_Accounts'].mean()),
+                round(persona_good['Num_Credit_Card'].mean()),
+                round(persona_good['Interest_Rate'].mean()),
+                round(persona_good['Num_of_Loan'].mean()),
+                round(persona_good['Delay_from_due_date'].mean()),
+                round(persona_good['Num_of_Delayed_Payment'].mean()),
+                round(persona_good['Changed_Credit_Limit'].mean()),
+                round(persona_good['Num_Credit_Inquiries'].mean()),
+                persona_good['Credit_Mix'].mode()[0],
+                round(persona_good['Outstanding_Debt'].mean()),
+                round(persona_good['Credit_Utilization_Ratio'].mean()),
+                round(persona_good['Credit_History_Age_Months'].mean()),
+                persona_good['Payment_of_Min_Amount'].mode()[0],
+                round(persona_good['Total_EMI_per_month'].mean()),
+                round(persona_good['Amount_invested_monthly'].mean()),
+                persona_good['Payment_Behaviour'].mode()[0],
+                round(persona_good['Monthly_Balance'].mean()),
+                persona_good['Credit_Score'].mode()[0]
+                ]
 
-                # # Adding previous results if available
-                # if 'previous_results' in st.session_state and st.session_state.previous_results:
-                #     previous_results = st.session_state.previous_results
-                # else:
-                #     previous_results = {field: "N/A" for field in results_df["Field"]}
+            # Define persona_standard_list
+            persona_standard_list = [
+                "Standard",
+                round(persona_standard['Age'].mean()),
+                persona_standard['Occupation'].mode()[0],
+                round(persona_standard['Annual_Income'].mean()),
+                round(persona_standard['Num_Bank_Accounts'].mean()),
+                round(persona_standard['Num_Credit_Card'].mean()),
+                round(persona_standard['Interest_Rate'].mean()),
+                round(persona_standard['Num_of_Loan'].mean()),
+                round(persona_standard['Delay_from_due_date'].mean()),
+                round(persona_standard['Num_of_Delayed_Payment'].mean()),
+                round(persona_standard['Changed_Credit_Limit'].mean()),
+                round(persona_standard['Num_Credit_Inquiries'].mean()),
+                persona_standard['Credit_Mix'].mode()[0],
+                round(persona_standard['Outstanding_Debt'].mean()),
+                round(persona_standard['Credit_Utilization_Ratio'].mean()),
+                round(persona_standard['Credit_History_Age_Months'].mean()),
+                persona_standard['Payment_of_Min_Amount'].mode()[0],
+                round(persona_standard['Total_EMI_per_month'].mean()),
+                round(persona_standard['Amount_invested_monthly'].mean()),
+                persona_standard['Payment_Behaviour'].mode()[0],
+                round(persona_standard['Monthly_Balance'].mean()),
+                persona_standard['Credit_Score'].mode()[0]
+                ]
 
-                # results_df["Previous Value"] = results_df["Field"].map(previous_results)
+            # Define persona_poor_list
+            persona_poor_list = [
+                "Bad",
+                round(persona_poor['Age'].mean()),
+                persona_poor['Occupation'].mode()[0],
+                round(persona_poor['Annual_Income'].mean()),
+                round(persona_poor['Num_Bank_Accounts'].mean()),
+                round(persona_poor['Num_Credit_Card'].mean()),
+                round(persona_poor['Interest_Rate'].mean()),
+                round(persona_poor['Num_of_Loan'].mean()),
+                round(persona_poor['Delay_from_due_date'].mean()),
+                round(persona_poor['Num_of_Delayed_Payment'].mean()),
+                round(persona_poor['Changed_Credit_Limit'].mean()),
+                round(persona_poor['Num_Credit_Inquiries'].mean()),
+                persona_poor['Credit_Mix'].mode()[0],
+                round(persona_poor['Outstanding_Debt'].mean()),
+                round(persona_poor['Credit_Utilization_Ratio'].mean()),
+                round(persona_poor['Credit_History_Age_Months'].mean()),
+                persona_poor['Payment_of_Min_Amount'].mode()[0],
+                round(persona_poor['Total_EMI_per_month'].mean()),
+                round(persona_poor['Amount_invested_monthly'].mean()),
+                persona_poor['Payment_Behaviour'].mode()[0],
+                round(persona_poor['Monthly_Balance'].mean()),
+                "Bad",
+                ]
 
-                st.markdown("""<h4><div class="tooltip">Comparative Analysis of Results<span class="tooltiptext">The comparative analysis evaluates the Credit Score against Good, Standard, and Bad Persona benchmarks to highlight areas for improvement.</span></div></h4>""", unsafe_allow_html=True)
-
-                st.dataframe(results_df, width=1200, height=800, hide_index=True,)  # Remove index column
-
-                # List of available features
-                available_features = [
+            # Display detailed results in a compact table
+            results_df = pd.DataFrame({
+                "Feature": [
                     "Customer ID", "Age", "Occupation", "Annual Income",
                     "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate",
                     "Number of Loans", "Days Delayed", "Number of Delayed Payments",
@@ -594,47 +556,85 @@ if st.button("Calculate Score", type="primary"):
                     "Outstanding Debt", "Credit Utilization Ratio", "Credit History Age",
                     "Payment of Min Amount", "Total EMI per Month", "Amount Invested Monthly",
                     "Payment Behaviour", "Monthly Balance", "Credit Score"
+                ],
+                "Current Value": [
+                    customer_id, age_value, occupation, annual_income_value,
+                    num_bank_accounts_value, num_credit_cards_value, interest_rate_value,
+                    num_loans_value, days_delayed_value, num_delayed_payments_value,
+                    changed_credit_limit_value, num_credit_inquiries_value, credit_mix,
+                    outstanding_debt_value, credit_utilization_ratio_value, credit_history_age,
+                    payment_of_min_amount, total_emi_per_month_value, amount_invested_monthly_value,
+                    payment_behaviour, monthly_balance_value,
+                    'Good' if result.get('Credit_Score') == 0 else 'Standard' if result.get('Credit_Score') == 2 else 'Bad'
+                ],
+                # "Persona": persona_list,
+                "Persona Good": persona_good_list,
+                "Persona Standard": persona_standard_list,
+                "Persona Bad": persona_poor_list
+            })
+
+            # # Adding previous results if available
+            # if 'previous_results' in st.session_state and st.session_state.previous_results:
+            #     previous_results = st.session_state.previous_results
+            # else:
+            #     previous_results = {field: "N/A" for field in results_df["Field"]}
+
+            # results_df["Previous Value"] = results_df["Field"].map(previous_results)
+
+            st.markdown("""<h4><div class="tooltip">Comparative Analysis of Results<span class="tooltiptext">The comparative analysis evaluates the Credit Score against Good, Standard, and Bad Persona benchmarks to highlight areas for improvement.</span></div></h4>""", unsafe_allow_html=True)
+
+            st.dataframe(results_df, width=1200, height=800, hide_index=True,)  # Remove index column
+
+            # List of available features
+            available_features = [
+                "Customer ID", "Age", "Occupation", "Annual Income",
+                "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate",
+                "Number of Loans", "Days Delayed", "Number of Delayed Payments",
+                "Changed Credit Limit", "Number of Credit Inquiries", "Credit Mix",
+                "Outstanding Debt", "Credit Utilization Ratio", "Credit History Age",
+                "Payment of Min Amount", "Total EMI per Month", "Amount Invested Monthly",
+                "Payment Behaviour", "Monthly Balance", "Credit Score"
+            ]
+
+            # User selects features from the list
+            selected_features = st.multiselect(
+                "Select features to visualize:",
+                options=available_features,
+                default=[
+                    "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate"
                 ]
+            )
 
-                # User selects features from the list
-                selected_features = st.multiselect(
-                    "Select features to visualize:",
-                    options=available_features,
-                    default=[
-                        "Number of Bank Accounts", "Number of Credit Cards", "Interest Rate"
-                    ]
-                )
+            # Ensure results_df is available
+            #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
+            # results_df = st.session_state.results_df (Julia)
 
-                # Ensure results_df is available
-                #if 'results_df' in st.session_state and not st.session_state.results_df.empty:
-                # results_df = st.session_state.results_df (Julia)
+            # Filter the DataFrame based on selected features
+            results_df_filtered = results_df[results_df['Feature'].isin(selected_features)]
 
-                # Filter the DataFrame based on selected features
-                results_df_filtered = results_df[results_df['Feature'].isin(selected_features)]
+            # Reshape the DataFrame for Plotly (melt)
+            results_melted = results_df_filtered.melt(id_vars='Feature', var_name='Persona', value_name='Value')
 
-                # Reshape the DataFrame for Plotly (melt)
-                results_melted = results_df_filtered.melt(id_vars='Feature', var_name='Persona', value_name='Value')
+            # Create a scatter plot
+            fig = px.scatter(
+                results_melted,
+                x='Feature',
+                y='Value',
+                color='Persona',
+                title='Graph of Results by Feature and Persona',
+                labels={'Feature': 'Features', 'Value': 'Values'},
+                color_discrete_map={
+                    'Current Value': 'black',  # Set color for 'Current Value' Ask Fernando
+                    'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
+                    'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
+                    'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
+                }
+            )
 
-                # Create a scatter plot
-                fig = px.scatter(
-                    results_melted,
-                    x='Feature',
-                    y='Value',
-                    color='Persona',
-                    title='Graph of Results by Feature and Persona',
-                    labels={'Feature': 'Features', 'Value': 'Values'},
-                    color_discrete_map={
-                        'Current Value': 'black',  # Set color for 'Current Value' Ask Fernando
-                        'Persona Good': 'green',  # Set color for 'Persona Good' Fernando insight
-                        'Persona Standard': 'orange',  # Set color for 'Persona Standard' Fernando insight
-                        'Persona Bad': 'red'  # Set color for 'Persona Bad' Fernando insight
-                    }
-                )
-
-                # Display the scatter plot in Streamlit
-                st.plotly_chart(fig)
-                #else:
-                #    st.error("No data available. Please ensure the DataFrame is properly loaded.")
+            # Display the scatter plot in Streamlit
+            st.plotly_chart(fig)
+            #else:
+            #    st.error("No data available. Please ensure the DataFrame is properly loaded.")
 
 # ### GRAPHE START
 #                 # Initialize scalers and encoders
@@ -734,15 +734,15 @@ if st.button("Calculate Score", type="primary"):
 # ### GRAPHE END
 
 
-                # Update previous results
-                #st.session_state.previous_results = dict(zip(results_df["Field"], results_df["Current Value"]))
+            # Update previous results
+            #st.session_state.previous_results = dict(zip(results_df["Field"], results_df["Current Value"]))
 
-            else:
-                st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
-        #st.session_state.results_df = results_df
+        else:
+            st.error(f"API request failed with status code {response.status_code}. Please check your inputs or try again later.")
+    #st.session_state.results_df = results_df
 
-    except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+    #except Exception as e:
+    #        st.error(f"An error occurred: {str(e)}")
 
 # # Define the function to convert the DataFrame
 # @st.cache_data
