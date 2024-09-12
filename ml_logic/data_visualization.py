@@ -16,6 +16,12 @@ html_content = """
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
         h1 { color: #4CAF50; }
+        .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        }
     </style>
 </head>
 <body>
@@ -25,12 +31,11 @@ html_content = """
 </body>
 </html>
 """
+
 # Logo
 image = Image.open('ml_logic/logo.png')
 logo_url = "logo.png"
 st.image(image)
-
-
 
 #App title and description
 st.markdown("""
