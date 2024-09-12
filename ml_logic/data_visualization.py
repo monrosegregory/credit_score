@@ -7,6 +7,8 @@ from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 import tempfile
 import os
 from PIL import Image
+import base64
+from io import BytesIO
 
 df_path = os.path.join(os.getcwd(), "ml_logic/df_cleaned_31082024.csv")
 
@@ -17,26 +19,32 @@ html_content = """
         body { font-family: Arial, sans-serif; margin: 40px; }
         h1 { color: #4CAF50; }
         .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <h1>Results</h1>
-    <p>Here are your results:</p>
-    <!-- Add more HTML content as needed -->
+    <div class="center">
+        <img src="data:image/png;base64,{image}" alt="Logo">
+    </div>
 </body>
 </html>
 """
 
-# Logo
 image = Image.open('ml_logic/logo.png')
-logo_url = "logo.png"
-st.image(image)
+buffered = BytesIO()
+image.save(buffered, format="PNG")
+image_base64 = base64.b64encode(buffered.getvalue()).decode()
 
+# Display the centered logo
+st.markdown(html_content.format(image=image_base64), unsafe_allow_html=True)
 #App title and description
 st.markdown("""
      #### Providing data-driven insights for financial institutions to better understand their B2C customers.
