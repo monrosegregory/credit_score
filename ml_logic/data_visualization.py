@@ -16,7 +16,7 @@ html_content = """
 <head>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #4CAF50; text-align: center; }
+        h1 { color: #000000; text-align: center; }
         .center {
             display: flex;
             justify-content: center;
@@ -41,7 +41,7 @@ image = Image.open('ml_logic/logo.png')
 st.markdown(html_content, unsafe_allow_html=True)
 
 # Streamlit image display
-st.image(image, width=80, use_column_width=True)
+st.image(image, width=100, use_column_width=True)
 
 # App title and description
 st.markdown("""
