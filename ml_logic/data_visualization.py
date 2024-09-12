@@ -21,13 +21,13 @@ html_content = """
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
         }
         .logo {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 20%;
+            width: 50%;
         }
     </style>
 </head>
@@ -45,7 +45,7 @@ st.image(image, width=100, use_column_width=True)
 
 # App title and description
 st.markdown("""
-    <h1 style='font-size: 36px; text-align: center;'>Providing data-driven insights for financial institutions</h1>
+    <h1 style='font-size: 32px; text-align: center;'>Providing data-driven insights for financial institutions</h1>
     <h3 style='text-align: center;'>Enter the customer's data to receive a detailed score classification from our algorithm.</h3>
 """, unsafe_allow_html=True)
 
