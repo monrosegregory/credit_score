@@ -34,7 +34,7 @@ html_content = """
 <body>
     <h1>Results</h1>
     <div class="center">
-        <img src="logo.png" class="logo" alt="Logo" />
+        a
     </div>
 </body>
 </html>
