@@ -31,12 +31,6 @@ html_content = """
         }
     </style>
 </head>
-<body>
-    <h1>Results</h1>
-    <div class="center">
-        a
-    </div>
-</body>
 </html>
 """
 
