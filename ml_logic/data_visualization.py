@@ -41,12 +41,12 @@ image = Image.open('ml_logic/logo.png')
 st.markdown(html_content, unsafe_allow_html=True)
 
 # Streamlit image display
-st.image(image, use_column_width=True)
+st.image(image, width=500)
 
 #App title and description
 st.markdown("""
-     #### Providing data-driven insights for financial institutions to better understand their B2C customers.
-     ##### Enter the customer's data to receive a detailed score classification from our algorithm.
+     ### Providing data-driven insights for financial institutions to better understand their B2C customers.
+     #### Enter the customer's data to receive a detailed score classification from our algorithm.
 """)
 
 # Set CSS style for tooltip
