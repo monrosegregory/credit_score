@@ -41,7 +41,7 @@ image = Image.open('ml_logic/logo.png')
 st.markdown(html_content, unsafe_allow_html=True)
 
 # Streamlit image display
-st.image(image, width=80, use_column_width=True)
+st.image(image, width=80, unsafe_allow_html=True)
 
 # App title and description
 st.markdown("""
