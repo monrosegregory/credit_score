@@ -7,44 +7,48 @@ from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 import tempfile
 import os
 from PIL import Image
-import base64
-from io import BytesIO
 
 df_path = os.path.join(os.getcwd(), "ml_logic/df_cleaned_31082024.csv")
 
+# HTML content with centered logo
 html_content = """
 <html>
 <head>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #4CAF50; }
+        h1 { color: #4CAF50; text-align: center; }
         .center {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-        img {
-            max-width: 100%;
-            height: auto;
+        .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
         }
     </style>
 </head>
 <body>
+    <h1>Results</h1>
     <div class="center">
-        <img src="data:image/png;base64,{image}" alt="Logo">
+        <img src="logo.png" class="logo" alt="Logo" />
     </div>
 </body>
 </html>
 """
 
+# Logo image
 image = Image.open('ml_logic/logo.png')
-buffered = BytesIO()
-image.save(buffered, format="PNG")
-image_base64 = base64.b64encode(buffered.getvalue()).decode()
 
-# Display the centered logo
-st.markdown(html_content.format(image=image_base64), unsafe_allow_html=True)
+# Display the HTML content in Streamlit
+st.markdown(html_content, unsafe_allow_html=True)
+
+# Streamlit image display
+st.image(image, use_column_width=True)
+
 #App title and description
 st.markdown("""
      #### Providing data-driven insights for financial institutions to better understand their B2C customers.
