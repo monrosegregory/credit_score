@@ -41,11 +41,11 @@ image = Image.open('ml_logic/logo.png')
 st.markdown(html_content, unsafe_allow_html=True)
 
 # Streamlit image display
-st.image(image, width=500, use_column_width=True)
+st.image(image, width=300, use_column_width=True)
 
 #App title and description
 st.markdown("""
-     ###🎯 Providing data-driven insights for financial institutions to better understand their B2C customers.
+     ##### Providing data-driven insights for financial institutions to better understand their B2C customers.
      ##### Enter the customer's data to receive a detailed score classification from our algorithm.
 """)
 
