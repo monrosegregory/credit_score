@@ -16,7 +16,7 @@ html_content = """
 <head>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #000000; text-align: center; }
+        h1 { text-align: center; }
         .center {
             display: flex;
             justify-content: center;
@@ -45,8 +45,8 @@ st.image(image, width=100, use_column_width=True)
 
 # App title and description
 st.markdown("""
-    <h1 style='font-size: 32px; text-align: center;'>Providing data-driven insights for financial institutions</h1>
-    <h3 style='text-align: center;'>Enter the customer's data to receive a detailed score classification from our algorithm.</h3>
+    <h1 style='font-size: 28px; text-align: center;'>Providing data-driven insights for financial institutions</h1>
+    <h3 style='font-size: 18px; text-align: center;'>Enter the customer's data to receive a detailed score analysis from our algorithm.</h3>
 """, unsafe_allow_html=True)
 
 # Set CSS style for tooltip
